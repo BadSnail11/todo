@@ -1,12 +1,15 @@
 package todo.project.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Topic implements Parentable {
     private String name;
-    private Task subTask;
+    private List<Task> subTasks;
 
     public Topic(String name) {
         this.name = name;
-        this.subTask = null;
     }
 
     public String getName() {
@@ -19,10 +22,21 @@ public class Topic implements Parentable {
 
     @Override
     public void addSubTask(Task subTask) {
-        if (this.subTask == null) {
-            this.subTask = subTask;
+        if (this.subTasks == null) {
+            this.subTasks = new ArrayList<>(Arrays.asList(subTask));
         } else {
-            this.subTask.addTask(subTask);
+            this.subTasks.add(subTask);
         }
+        subTask.setParent(this);
+    }
+
+    @Override
+    public List<Task> getSubTasks() {
+        return this.subTasks;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

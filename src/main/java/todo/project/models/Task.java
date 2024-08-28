@@ -1,14 +1,18 @@
 package todo.project.models;
 
-public class Task implements Parentable, Comparable<Task> {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class Task implements Parentable, Comparable<Task>, Comparator<Task> {
     private String description;
     private boolean done;
-    private Task nextTask;
-    private Task subTask;
+    private List<Task> subTasks;
     private Parentable parent;
     private String priority;
 
-    static enum Priorities {
+    public static enum Priorities {
         none,
         low,
         medium,
@@ -18,10 +22,14 @@ public class Task implements Parentable, Comparable<Task> {
     public Task(String description){
         this.description = description;
         this.done = false;
-        this.nextTask = null;
-        this.subTask = null;
+        this.subTasks = null;
         this.parent = null;
         this.priority = Priorities.none.name();
+    }
+
+    public Task(Parentable parent, String description) {
+        this(description);
+        parent.addSubTask(this);
     }
 
     public String getDescription() {
@@ -40,6 +48,18 @@ public class Task implements Parentable, Comparable<Task> {
         this.done = done;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priorities priority) {
+        this.priority = priority.name();
+    }
+
+    public void switchDone() {
+        this.done = !this.done;
+    }
+
     public Parentable getParent() {
         return parent;
     }
@@ -48,29 +68,19 @@ public class Task implements Parentable, Comparable<Task> {
         this.parent = parent;
     }
 
-    /**Returns last task in task list*/
-    private Task getLastTask(Task task) {
-        while (task.nextTask != null) {
-            task = task.nextTask;
+    @Override
+    public void addSubTask(Task subTask) {
+        if (this.subTasks == null) {
+            this.subTasks = new ArrayList<>(Arrays.asList(subTask));
+        } else {
+            this.subTasks.add(subTask);
         }
-        return task;
-    }
-
-    private void setNextTask(Task nextTask) {
-        this.nextTask = nextTask;
-    }
-
-    public void addTask(Task task) {
-        getLastTask(this).setNextTask(task);
+        subTask.setParent(this);
     }
 
     @Override
-    public void addSubTask(Task subTask) {
-        if (this.subTask == null) {
-            this.subTask = subTask;
-        } else {
-            this.subTask.addTask(subTask);
-        }
+    public List<Task> getSubTasks() {
+        return this.subTasks;
     }
 
     @Override
@@ -81,7 +91,14 @@ public class Task implements Parentable, Comparable<Task> {
     }
 
     @Override
+    public int compare(Task task1, Task task2) {
+        Priorities priority1 = Priorities.valueOf(task1.priority);
+        Priorities priority2 = Priorities.valueOf(task2.priority);
+        return priority1.compareTo(priority2);
+    }
+
+    @Override
     public String toString() {
-        return getDescription();
+        return getDescription() + " | " + isDone();
     }
 }
