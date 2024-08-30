@@ -1,4 +1,5 @@
-package todo.project;
+package todo.project.services;
+
 import todo.project.models.*;
 
 import java.security.MessageDigest;
@@ -32,12 +33,5 @@ public class Service {
         }
         byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         return bytesToHex(encodedHash);
-    }
-
-    static public User userRegister(String login, String password) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(passwordCypher(password));
-        return user;
     }
 }
