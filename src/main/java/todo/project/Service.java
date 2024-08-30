@@ -1,8 +1,6 @@
 package todo.project;
 import todo.project.models.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
@@ -24,7 +22,7 @@ public class Service {
         return hexString.toString();
     }
 
-    static private String passwordCypher(String password) {
+    static public String passwordCypher(String password) {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-256");

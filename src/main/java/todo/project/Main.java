@@ -1,18 +1,23 @@
 package todo.project;
-import todo.project.models.Topic;
-import todo.project.models.Task;
+
+import todo.project.entity.User;
+import todo.project.persistence.HibernateUtil;
+import org.hibernate.Session;
 
 public class Main {
+
     public static void main(String[] args) {
-        Topic h1 = new Topic("First");
-        Task t2 = new Task(h1, "do task 2");
-        Task t1 = new Task("do task 1");
-        h1.addSubTask(t1);
-        t2.setPriority(Task.Priorities.high);
-        t2.switchDone();
-        Service.sortTasks(h1);
-        for (var task : h1.getSubTasks()) {
-            System.out.println(task.toString());
-        }
+        System.out.println("Maven + Hibernate + MySQL");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        session.beginTransaction();
+        User user = new User();
+
+        user.setLogin("Alex");
+        user.setPassword(Service.passwordCypher("abc"));
+
+        session.save(user);
+        session.getTransaction().commit();
     }
+
 }
