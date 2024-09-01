@@ -31,5 +31,10 @@
 
         <!-- Mapping files -->
         <mapping class="todo.project.entity.User"/>
+        <mapping class="todo.project.entity.Task"/>
+        <mapping class="todo.project.entity.Topic"/>
+        <mapping class="todo.project.entity.TopicUserLink"/>
+        <mapping class="todo.project.entity.TaskTopicLink"/>
+        <mapping class="todo.project.entity.SubtaskTaskLink"/>
     </session-factory>
 </hibernate-configuration>

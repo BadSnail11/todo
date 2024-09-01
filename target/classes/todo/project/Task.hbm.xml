@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="todo.project.entity.Task" table="task" catalog="todo">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="255" />
+        </property>
+        <property name="done" type="java.lang.Integer">
+            <column name="done" />
+        </property>
+        <property name="priority" type="string">
+            <column name="priority" length="255" />
+        </property>
+    </class>
+</hibernate-mapping>

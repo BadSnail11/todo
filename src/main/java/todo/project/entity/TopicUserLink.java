@@ -9,42 +9,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable{
-
+@Table(name = "topic_user_link")
+public class TopicUserLink implements Serializable {
+    
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String login;
+    private Integer topic_id;
 
-    private String password;
-
-    public User(){}
+    private Integer user_id;
 
     public Integer getId() {
         return id;
     }
 
-    // public void setId(Integer id) {
-    //     this.id = id;
-    // }
-
-    public String getLogin() {
-        return login;
+    public Integer getTopic_id() {
+        return topic_id;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setTopic_id(Integer topic_id) {
+        this.topic_id = topic_id;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
+
 }

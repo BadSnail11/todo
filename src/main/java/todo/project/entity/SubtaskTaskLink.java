@@ -9,42 +9,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable{
-
+@Table(name = "subtask_task_link")
+public class SubtaskTaskLink implements Serializable {
+    
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String login;
+    private Integer subtask_id;
 
-    private String password;
-
-    public User(){}
+    private Integer task_id;
 
     public Integer getId() {
         return id;
     }
 
-    // public void setId(Integer id) {
-    //     this.id = id;
-    // }
-
-    public String getLogin() {
-        return login;
+    public Integer getSubtask_id() {
+        return subtask_id;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setSubtask_id(Integer subtask_id) {
+        this.subtask_id = subtask_id;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getTask_id() {
+        return task_id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTask_id(Integer task_id) {
+        this.task_id = task_id;
     }
+
 }
