@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "topic")
-public class Topic implements Serializable {
+public class Topic implements Serializable, Parentable {
     
     private static final long serialVersionUID = 1L;
 
